@@ -1,1 +1,7 @@
 secrets.yaml
+www/google*.html
+*.db
+*.db-shm
+*.db-wal
+.uuid
+*.log

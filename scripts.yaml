@@ -1,4 +1,6 @@
 chime_doorbell:
+  alias: Chime doorbell
+  sequence:
     - service: media_player.play_media
       data:
         entity_id: media_player.bedroom_speaker
