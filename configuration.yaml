@@ -26,6 +26,8 @@ discovery:
 
 conversation:
 
+recorder:
+
 history:
 
 logbook:
@@ -41,6 +43,19 @@ sensor:
     name: Travel Time to Work
     options:
       mode: transit
+  - platform: citybikes
+    radius: 20000
+  - platform: pocketcasts
+    username: tigeroakes@gmail.com
+    password: !secret pocketcasts_password
+  - platform: steam_online
+    api_key: !sercret steam_api
+    accounts:
+      - 76561198074004593
+      - 76561198137492282
+      - 76561198031616413
+      - 76561198210447675
+      - 76561198045873121
 
 light:
   - platform: lifx
@@ -52,6 +67,8 @@ switch:
 
 media_player:
   - platform: cast
+  - platform: gpmdp
+    host: 192.168.50.2
 
 notify:
   - name: web
@@ -61,6 +78,10 @@ notify:
   - name: pushbullet
     platform: pushbullet
     api_key: !secret pushbullet_api
+
+scene:
+  - platform: lifx_cloud
+    token: !secret lifx_api
 
 tts:
   - platform: google
