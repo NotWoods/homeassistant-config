@@ -49,7 +49,7 @@ sensor:
     username: tigeroakes@gmail.com
     password: !secret pocketcasts_password
   - platform: steam_online
-    api_key: !sercret steam_api
+    api_key: !secret steam_api
     accounts:
       - 76561198074004593
       - 76561198137492282
