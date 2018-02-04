@@ -10,15 +10,15 @@ homeassistant:
   time_zone: America/Vancouver
   customize: !include customize.yaml
 
-frontend:
-
-config:
-
 http:
   api_password: !secret http_password
   base_url: https://tiger-home.duckdns.org
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
+
+frontend:
+
+config:
 
 updater:
 
@@ -34,6 +34,8 @@ logbook:
 
 sun:
 
+cloud:
+
 sensor:
   - platform: yr
   - platform: google_travel_time
@@ -43,8 +45,6 @@ sensor:
     name: Travel Time to Work
     options:
       mode: transit
-  - platform: citybikes
-    radius: 20000
   - platform: pocketcasts
     username: tigeroakes@gmail.com
     password: !secret pocketcasts_password
@@ -86,8 +86,6 @@ scene:
 tts:
   - platform: google
 
-cloud:
-
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
@@ -98,3 +96,26 @@ ifttt:
 wemo:
   static:
     - 192.168.50.203
+
+hdmi_cec:
+  devices:
+    TV: 0.0.0.0
+    Chromecast: 1.0.0.0
+    Pi Zero: 2.0.0.0
+    Wii U: 3.0.0.0
+    Nintendo Switch: 4.0.0.0
+
+input_select:
+  tv_input:
+    name: TV Input
+    options:
+      - Chromecast
+      - Wii U
+      - Switch
+    initial: Chromecast
+    icon: mdi:television-classic
+
+weblink:
+  entities:
+    - name: Router
+      url: https://router.asus.com:8443

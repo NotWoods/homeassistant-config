@@ -3,3 +3,6 @@ switch.desk_lights:
 script.chime_doorbell:
   icon: mdi:volume-high
   friendly_name: Chime doorbell
+switch.hdmi_8:
+  vendor_name: Nintendo
+  friendly_name: Nintendo Switch
