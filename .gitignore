@@ -5,3 +5,5 @@ www/google*.html
 *.db-wal
 .uuid
 *.log
+*.conf
+tts
