@@ -7,3 +7,4 @@ www/google*.html
 *.log
 *.conf
 tts
+.HA_VERSION

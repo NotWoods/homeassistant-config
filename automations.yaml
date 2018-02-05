@@ -1,1 +1,8 @@
-[]
+- alias: Set TV Input
+  trigger:
+    platform: state
+    entity_id: input_select.tv_input
+  action:
+    service: hdmi_cec.select_device
+    data_template:
+      device: "{{ states('input_select.tv_input') }}"
