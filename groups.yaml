@@ -1,3 +1,14 @@
+lights:
+  name: Lights
+  entities:
+    - light.bedside_lamp
+    - switch.desk_lights
+    - switch.back_light
+television:
+  name: Television
+  entities:
+    - switch.hdmi_0
+    - input_select.tv_input
 steam:
   name: Steam
   entities:
@@ -6,13 +17,3 @@ steam:
     - sensor.steam_76561198074004593
     - sensor.steam_76561198137492282
     - sensor.steam_76561198210447675
-television:
-  name: Television
-  entities:
-    - switch.hdmi_0
-    - input_select.tv_input
-lights:
-  name: Lights
-  entities:
-    - light.bedside_lamp
-    - switch.desk_lights
