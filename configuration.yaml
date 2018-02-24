@@ -71,6 +71,14 @@ switch:
     name: Desk Lights
     host: 192.168.50.204
 
+device_tracker:
+  - platform: asuswrt
+    host: 192.168.50.1
+    username: tiger
+    password: !secret asuswrt_password
+    protocol: telnet
+    port: 23
+
 media_player:
   - platform: cast
   - platform: gpmdp
