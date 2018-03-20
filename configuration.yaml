@@ -78,6 +78,9 @@ device_tracker:
     password: !secret asuswrt_password
     protocol: telnet
     port: 23
+    new_device_defaults:
+      track_new_devices: False
+      hide_if_away: False
 
 media_player:
   - platform: cast
@@ -94,8 +97,45 @@ notify:
     api_key: !secret pushbullet_api
 
 scene:
-  - platform: lifx_cloud
-    token: !secret lifx_api
+  - name: Standard
+    entities:
+      switch.back_light: on
+      switch.desk_lights: on
+      light.bedside_lamp:
+        state: on
+        color_temp: 285
+        rgb_color: 181,181,181
+        brightness: 181
+  - name: Study
+    entities:
+      switch.back_light: off
+      switch.desk_lights: on
+      input_boolean.tv_input: off
+      light.bedside_lamp:
+        state: on
+        color_temp: 181
+        rgb_color: 255,255,255
+        brightness: 255
+  - name: Romantic
+    entities:
+      switch.back_light: off
+      switch.desk_lights: off
+      input_boolean.tv_input: off
+      light.bedside_lamp:
+        state: on
+        color_temp: 285
+        rgb_color: 130,124,83
+        brightness: 130
+  - name: Movie
+    entities:
+      switch.back_light: on
+      input_boolean.tv_input: on
+      switch.desk_lights: off
+      light.bedside_lamp:
+        state: on
+        color_temp: 181
+        rgb_color: 255,255,255
+        brightness: 255
 
 tts:
   - platform: google
@@ -128,6 +168,11 @@ input_select:
       - Nintendo Switch
     initial: Chromecast
     icon: mdi:television-classic
+
+input_boolean:
+  hdmi_power:
+    name: TV Power
+    icon: mdi:television
 
 weblink:
   entities:

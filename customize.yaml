@@ -8,3 +8,9 @@ script.chime_doorbell:
 switch.hdmi_8:
   vendor_name: Nintendo
   friendly_name: Nintendo Switch
+scene.study:
+  icon: mdi:chair-school
+scene.romantic:
+  icon: mdi:heart
+scene.movie:
+  icon: mdi:movie

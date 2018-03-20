@@ -1,3 +1,31 @@
+default_view:
+  view: yes
+  name: Home
+  entities:
+    - sensor.travel_time_to_work
+    - sensor.weather_temperature
+    - group.lights
+    - group.television
+    - weblink.router
+    - group.scenes
+media:
+  view: yes
+  name: Media
+  entities:
+    - sensor.pocketcasts_unlistened_episodes
+    - media_player.bedroom_speaker
+    - media_player.white
+    - group.steam
+statuses:
+  view: yes
+  name: Statuses
+  entities:
+    - sun.sun
+    - device_tracker.d4389c01435c
+    - device_tracker.taffy
+    - group.all_scripts
+    - group.all_automations
+
 lights:
   name: Lights
   entities:
@@ -7,8 +35,16 @@ lights:
 television:
   name: Television
   entities:
-    - switch.hdmi_0
+    - input_boolean.hdmi_power
     - input_select.tv_input
+tv_devices:
+  name: Television Devices
+  icon: mdi:video-input-hdmi
+  control: hidden
+  entities:
+    - switch.hdmi_0
+    - switch.hdmi_4
+    - switch.hdmi_8
 steam:
   name: Steam
   entities:
@@ -17,3 +53,10 @@ steam:
     - sensor.steam_76561198074004593
     - sensor.steam_76561198137492282
     - sensor.steam_76561198210447675
+scenes:
+  name: Scenes
+  entities:
+    - scene.standard
+    - scene.study
+    - scene.romantic
+    - scene.movie
