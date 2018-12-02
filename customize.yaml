@@ -4,13 +4,3 @@ switch.back_light:
   icon: mdi:lightbulb
 script.chime_doorbell:
   icon: mdi:volume-high
-  friendly_name: Chime doorbell
-switch.hdmi_8:
-  vendor_name: Nintendo
-  friendly_name: Nintendo Switch
-scene.study:
-  icon: mdi:chair-school
-scene.romantic:
-  icon: mdi:heart
-scene.movie:
-  icon: mdi:movie

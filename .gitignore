@@ -8,3 +8,4 @@ www/google*.html
 *.conf
 tts
 .HA_VERSION
+known_devices.yaml

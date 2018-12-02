@@ -6,37 +6,59 @@ homeassistant:
   longitude: !secret longitude
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 0
+  # metric for Metric, imperial for Imperial
   unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Vancouver
+  # Customization file
   customize: !include customize.yaml
 
-http:
-  api_password: !secret http_password
-  base_url: https://tiger-home.duckdns.org
-  ssl_certificate: /ssl/fullchain.pem
-  ssl_key: /ssl/privkey.pem
+# Show links to resources in log and frontend
+introduction:
 
+
+# Enables the frontend
 frontend:
 
+# Enables configuration UI
 config:
 
-updater:
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+  base_url: https://home.tigeroakes.com
+  ssl_certificate: /etc/letsencrypt/live/home.tigeroakes.com/fullchain.pem
+  ssl_key: /etc/letsencrypt/live/home.tigeroakes.com/privkey.pem
 
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
 discovery:
 
+# Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
-recorder:
-
+# Enables support for tracking state changes over time
 history:
 
+# View all events in a logbook
 logbook:
 
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
 sun:
 
-cloud:
-
+# Sensors
 sensor:
+  # Weather prediction
   - platform: yr
     name: Weather
     monitored_conditions:
@@ -44,16 +66,6 @@ sensor:
       - temperature
       - windSpeed
       - cloudiness
-  - platform: google_travel_time
-    api_key: !secret google_api
-    origin: !secret coordinates
-    destination: 289-2366 Main Mall, Vancouver, BC
-    name: Travel Time to Work
-    options:
-      mode: transit
-  - platform: pocketcasts
-    username: tigeroakes@gmail.com
-    password: !secret pocketcasts_password
   - platform: steam_online
     api_key: !secret steam_api
     accounts:
@@ -63,118 +75,50 @@ sensor:
       - 76561198210447675
       - 76561198045873121
 
-light:
-  - platform: lifx
-
 switch:
   - platform: tplink
     name: Desk Lights
     host: 192.168.50.204
+  - platform: tplink
+    name: Back Light
+    host: 192.168.50.32
+
+asuswrt:
+  host: 192.168.50.1
+  username: !secret asus_router_username
+  password: !secret asus_router_password
+  protocol: telnet
+  port: 23
 
 device_tracker:
   - platform: asuswrt
-    host: 192.168.50.1
-    username: tiger
-    password: !secret asuswrt_password
-    protocol: telnet
-    port: 23
     new_device_defaults:
       track_new_devices: False
       hide_if_away: False
 
-media_player:
-  - platform: cast
-  - platform: gpmdp
-    host: 192.168.50.2
-
 notify:
-  - name: web
-    platform: html5
+  - platform: html5
+    name: HTML5
     gcm_api_key: !secret gcm_api
     gcm_sender_id: !secret gcm_sender_id
-  - name: pushbullet
-    platform: pushbullet
-    api_key: !secret pushbullet_api
+  - platform: slack
+    name: Slack
+    api_key: !secret slack_api
+    default_channel: '#general'
+    icon: ':house:'
 
-scene:
-  - name: Standard
-    entities:
-      switch.back_light: on
-      switch.desk_lights: on
-      light.bedside_lamp:
-        state: on
-        color_temp: 285
-        rgb_color: 181,181,181
-        brightness: 181
-  - name: Study
-    entities:
-      switch.back_light: off
-      switch.desk_lights: on
-      input_boolean.tv_input: off
-      light.bedside_lamp:
-        state: on
-        color_temp: 181
-        rgb_color: 255,255,255
-        brightness: 255
-  - name: Romantic
-    entities:
-      switch.back_light: off
-      switch.desk_lights: off
-      input_boolean.tv_input: off
-      light.bedside_lamp:
-        state: on
-        color_temp: 285
-        rgb_color: 130,124,83
-        brightness: 130
-  - name: Movie
-    entities:
-      switch.back_light: on
-      input_boolean.tv_input: on
-      switch.desk_lights: off
-      light.bedside_lamp:
-        state: on
-        color_temp: 181
-        rgb_color: 255,255,255
-        brightness: 255
+media_player:
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
 
+# Text to speech
 tts:
   - platform: google
+
+# Cloud
+cloud:
 
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
-
-ifttt:
-  key: !secret ifttt_webhooks
-
-wemo:
-  static:
-    - 192.168.50.203
-
-hdmi_cec:
-  devices:
-    TV: 0.0.0.0
-    Chromecast: 1.0.0.0
-    Pi Zero: 2.0.0.0
-    Wii U: 3.0.0.0
-    Nintendo Switch: 4.0.0.0
-
-input_select:
-  tv_input:
-    name: TV Input
-    options:
-      - Chromecast
-      - Wii U
-      - Nintendo Switch
-    initial: Chromecast
-    icon: mdi:television-classic
-
-input_boolean:
-  hdmi_power:
-    name: TV Power
-    icon: mdi:television
-
-weblink:
-  entities:
-    - name: Router
-      url: https://router.asus.com:8443
