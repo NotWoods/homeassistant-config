@@ -2,5 +2,7 @@ switch.desk_lights:
   icon: mdi:lightbulb
 switch.back_light:
   icon: mdi:lightbulb
+light.bedside_lamp:
+  icon: mdi:floor-lamp
 script.chime_doorbell:
   icon: mdi:volume-high

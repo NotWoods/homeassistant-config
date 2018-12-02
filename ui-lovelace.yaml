@@ -1,0 +1,54 @@
+title: Home at UBC
+views:
+  - title: Devices
+    cards:
+      #- type: weather-forecast
+      #  entity: weather.darksky
+      - id: peoplehome
+        type: entity-filter
+        entities:
+          - device_tracker.tiger_xperia
+          - device_tracker.taffy
+          - device_tracker.michael_chern
+        state_filter:
+          - 'home'
+        card:
+          type: glance
+          title: People at home
+          show_state: false
+      - type: horizontal-stack
+        cards:
+          - type: light
+            entity: light.bedside_lamp
+          - type: entity-button
+            entity: switch.desk_lights
+          - type: entity-button
+            entity: switch.back_light
+
+  - title: TV
+    cards:
+      - id: steam
+        type: entities
+        entities:
+          - type: weblink
+            name: Steam chat
+            url: https://steamcommunity.com/chat/
+            icon: mdi:steam
+          - entity: sensor.steam_76561198317790324
+            name: Cougar
+          - entity: sensor.steam_76561198031616413
+            name: Jaren
+          - entity: sensor.steam_76561198045873121
+            name: Hoku
+          - entity: sensor.steam_76561198074004593
+            name: Victor
+          - entity: sensor.steam_76561198137492282
+            name: Kelsey
+          - entity: sensor.steam_76561198210447675
+            name: Jake
+          - entity: sensor.steam_76561198057172947
+            name: Ryan
+      - type: entity-button
+        entity: switch.back_light
+      - type: media-control
+        entity: media_player.white
