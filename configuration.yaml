@@ -26,8 +26,8 @@ config:
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
   base_url: https://home.tigeroakes.com
-  ssl_certificate: /etc/letsencrypt/live/home.tigeroakes.com/fullchain.pem
-  ssl_key: /etc/letsencrypt/live/home.tigeroakes.com/privkey.pem
+  ssl_certificate: /config/ssl/fullchain.pem
+  ssl_key: /config/ssl/privkey.pem
 
 # Checks for available updates
 # Note: This component will send some information about your system to
