@@ -2,8 +2,8 @@ title: Home at UBC
 views:
   - title: Devices
     cards:
-      #- type: weather-forecast
-      #  entity: weather.darksky
+      - type: weather-forecast
+        entity: weather.dark_sky
       - id: peoplehome
         type: entity-filter
         entities:
@@ -22,8 +22,12 @@ views:
             entity: light.bedside_lamp
           - type: entity-button
             entity: switch.desk_lights
+            tap_action: toggle
+            hold_action: more-info
           - type: entity-button
             entity: switch.back_light
+            tap_action: toggle
+            hold_action: more-info
 
   - title: TV
     cards:
@@ -50,5 +54,7 @@ views:
             name: Ryan
       - type: entity-button
         entity: switch.back_light
+        tap_action: toggle
+        hold_action: more-info
       - type: media-control
         entity: media_player.white
