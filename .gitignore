@@ -9,3 +9,4 @@ www/google*.html
 tts
 .HA_VERSION
 known_devices.yaml
+!travis/secrets.yaml
