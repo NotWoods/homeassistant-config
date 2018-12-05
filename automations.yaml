@@ -1,1 +1,35 @@
-[]
+- alias: Update notifications
+  trigger:
+    - platform: state
+      entity_id: updater.updater
+  action:
+    service: notify.slack
+    data:
+      message: 'There is a new Home Assistant release available.'
+- alias: "Media player paused/stopped"
+  trigger:
+    - platform: state
+      entity_id: media_player.white
+      from: 'playing'
+      to: 'idle'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    service: scene.turn_on
+    entity_id: scene.standard
+
+- alias: "Media player playing"
+  trigger:
+    - platform: state
+      entity_id: media_player.white
+      to: 'playing'
+      from: 'idle'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    service: scene.turn_on
+    entity_id: scene.movie

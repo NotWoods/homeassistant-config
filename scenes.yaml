@@ -1,0 +1,36 @@
+- name: Standard
+  entities:
+    switch.back_light: off
+    switch.desk_lights: on
+    light.bedside_lamp:
+      state: on
+      color_temp: 285
+      rgb_color: 181,181,181
+      brightness: 181
+- name: Study
+  entities:
+    switch.back_light: off
+    switch.desk_lights: on
+    light.bedside_lamp:
+      state: on
+      color_temp: 181
+      rgb_color: 255,255,255
+      brightness: 255
+- name: Romantic
+  entities:
+    switch.back_light: off
+    switch.desk_lights: off
+    light.bedside_lamp:
+      state: on
+      color_temp: 285
+      rgb_color: 130,124,83
+      brightness: 130
+- name: Movie
+  entities:
+    switch.back_light: on
+    switch.desk_lights: off
+    light.bedside_lamp:
+      state: on
+      color_temp: 181
+      rgb_color: 255,255,255
+      brightness: 130
