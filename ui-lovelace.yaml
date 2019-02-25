@@ -1,43 +1,66 @@
-title: Home at UBC
+title: Home
 views:
-  - title: Devices
+  - badges:
+      - sensor.rt_ac750_packets_sec_received
+      - sensor.rt_ac750_kbyte_sec_sent
+      - sensor.rt_ac750_kbyte_sec_received
+      - sensor.rt_ac750_packets_received
+      - sensor.rt_ac750_packets_sec_sent
+      - sensor.rt_ac750_packets_sent
+      - sensor.rt_ac750_bytes_received
+      - sensor.rt_ac750_bytes_sent
     cards:
-      - type: weather-forecast
-        entity: weather.dark_sky
-      - id: peoplehome
-        type: entity-filter
+      - entity: weather.dark_sky
+        type: weather-forecast
+      - card:
+          show_state: false
+          title: People at home
+          type: glance
         entities:
           - device_tracker.tiger_xperia
           - device_tracker.taffy
           - device_tracker.michael_chern
         state_filter:
-          - 'home'
-        card:
-          type: glance
-          title: People at home
-          show_state: false
-      - type: horizontal-stack
-        cards:
-          - type: light
-            entity: light.bedside_lamp
-          - type: entity-button
-            entity: switch.desk_lights
-            tap_action: toggle
-            hold_action: more-info
-          - type: entity-button
-            entity: switch.back_light
-            tap_action: toggle
-            hold_action: more-info
-
-  - title: TV
-    cards:
-      - id: steam
+          - home
+        type: entity-filter
+      - cards:
+          - entity: light.bedside_lamp
+            type: light
+          - cards:
+              - entity: switch.desk_lights
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: switch.back_light
+                tap_action:
+                  action: toggle
+                type: entity-button
+            type: horizontal-stack
+        type: vertical-stack
+      - entity: media_player.spotify
+        type: media-control
+      - entity: media_player.bedroom_speaker
+        type: media-control
+      - entity: media_player.taffy_speaker
+        type: media-control
+      - entity: media_player.bedroom_group
+        type: media-control
+      - entities:
+          - scene.romantic
+          - scene.study
+          - scene.standard
+          - scene.movie
+        title: Scene
         type: entities
-        entities:
-          - type: weblink
+    path: home
+    title: Devices
+  - badges: []
+    cards:
+      - entities:
+          - icon: 'mdi:steam'
             name: Steam chat
-            url: https://steamcommunity.com/chat/
-            icon: mdi:steam
+            type: weblink
+            url: 'https://steamcommunity.com/chat/'
           - entity: sensor.steam_76561198317790324
             name: Cougar
           - entity: sensor.steam_76561198031616413
@@ -52,9 +75,37 @@ views:
             name: Jake
           - entity: sensor.steam_76561198057172947
             name: Ryan
-      - type: entity-button
-        entity: switch.back_light
-        tap_action: toggle
-        hold_action: more-info
-      - type: media-control
-        entity: media_player.white
+        show_header_toggle: false
+        type: entities
+      - entity: switch.back_light
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: media_player.white
+        type: media-control
+    path: tv
+    title: TV
+  - badges: []
+    cards:
+      - entity: media_player.bedroom_speaker
+        type: media-control
+      - entity: media_player.taffy_speaker
+        type: media-control
+      - card:
+          entity: media_player.spotify
+          type: media-control
+        conditions:
+          - entity: media_player.spotify
+            state: playing
+        type: conditional
+      - card:
+          entity: media_player.bedroom_group
+          type: media-control
+        conditions:
+          - entity: media_player.bedroom_group
+            state: playing
+        type: conditional
+    path: speakers
+    title: Speakers
