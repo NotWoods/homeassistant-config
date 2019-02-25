@@ -35,6 +35,20 @@ updater:
   # Optional, allows Home Assistant developers to focus on popular components.
   # include_used_components: true
 
+recorder:
+  exclude:
+    domains:
+      - automation
+    entities:
+      - sensor.steam_76561198074004593
+      - sensor.steam_76561198137492282
+      - sensor.steam_76561198031616413
+      - sensor.steam_76561198210447675
+      - sensor.steam_76561198045873121
+      - sensor.steam_76561198317790324
+      - sensor.steam_76561198057172947
+      - media_player.xperia_xz1
+
 # Discover some devices automatically
 discovery:
 
@@ -58,8 +72,32 @@ weather:
     api_key: !secret dark_sky_api
     units: ca
 
+googlehome:
+  devices:
+    - host: 192.168.50.150
+      track_alarms: true
+
+rest_command:
+  cellwall_text:
+    url: 'http://192.168.50.249:3000/wall/action/text'
+    method: post
+    payload: '{"profile":{"status_text": "{{ status }}","status_emoji": "{{ emoji }}"}}'
+    payload: '["{{ 0 }}", "{{ 1 }}", "{{ 2 }}", "{{ 3 }}", "{{ 4 }}", "{{ 5 }}"]'
+    content_type:  'application/json; charset=utf-8'
+
 # Sensors
 sensor:
+  - platform: github
+    access_token: !secret github_access_token
+    repositories:
+      - path: 'NotWoods/chrome-supersize-reports'
+      - path: 'NotWoods/big-island-buses'
+      - path: 'NotWoods/color-breakdown'
+      - path: 'NotWoods/cell-wall'
+      - path: 'NotWoods/unity-polygon-2d-editor'
+      - path: 'NotWoods/spherical-geometry-js'
+  - platform: travisci
+    api_key: !secret github_access_token
   - platform: steam_online
     api_key: !secret steam_api
     accounts:

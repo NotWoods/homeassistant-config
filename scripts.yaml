@@ -4,5 +4,5 @@ chime_doorbell:
     - service: media_player.play_media
       data:
         entity_id: media_player.bedroom_speaker
-        media_content_id: https://tiger-home.duckdns.org/local/Ding-dong-chime.mp3
+        media_content_id: https://home.tigeroakes.com/local/Ding-dong-chime.mp3
         media_content_type: audio/mp3
