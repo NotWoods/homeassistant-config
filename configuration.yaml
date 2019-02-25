@@ -64,6 +64,8 @@ logbook:
 # Enables a map showing the location of tracked devices
 map:
 
+system_health:
+
 # Track the sun
 sun:
 
@@ -81,8 +83,7 @@ rest_command:
   cellwall_text:
     url: 'http://192.168.50.249:3000/wall/action/text'
     method: post
-    payload: '{"profile":{"status_text": "{{ status }}","status_emoji": "{{ emoji }}"}}'
-    payload: '["{{ 0 }}", "{{ 1 }}", "{{ 2 }}", "{{ 3 }}", "{{ 4 }}", "{{ 5 }}"]'
+    payload: '[{% for t in text -%}{%- if not loop.first %},{% endif -%}"{{ t }}"{%- endfor %}]'
     content_type:  'application/json; charset=utf-8'
 
 # Sensors
@@ -135,11 +136,6 @@ notify:
     name: HTML5
     gcm_api_key: !secret gcm_api
     gcm_sender_id: !secret gcm_sender_id
-  - platform: slack
-    name: Slack
-    api_key: !secret slack_api
-    default_channel: '#general'
-    icon: ':house:'
 
 media_player:
   - platform: spotify
